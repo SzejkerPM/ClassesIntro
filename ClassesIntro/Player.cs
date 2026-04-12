@@ -34,12 +34,19 @@ public class Player
 
     public void Display()
     {
-        Console.WriteLine(avatar);
+        Console.SetCursorPosition(x,y);
+        Console.Write(avatar);
     }
 
     public void Move(int diffX, int diffY)
     {
         x += diffX;
         y += diffY;
+    }
+
+    public void ClearPosition()
+    {
+        Console.SetCursorPosition(x, y);
+        Console.Write(' ');
     }
 }
