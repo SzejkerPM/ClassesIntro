@@ -40,8 +40,20 @@ public class Player
 
     public void Move(int diffX, int diffY)
     {
-        x += diffX;
-        y += diffY;
+        var targetX = x + diffX;
+        
+        if (targetX >= 0 && targetX < Console.BufferWidth)
+        {
+            x = targetX;
+        }
+        
+        var targetY = y + diffY;
+        
+        if (targetY >= 0 && targetY < Console.BufferHeight)
+        {
+            y = targetY;
+        }
+        
     }
 
     public void ClearPosition()
