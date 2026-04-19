@@ -3,7 +3,8 @@
 // string playerAvatar = "@";
 // Console.WriteLine(playerAvatar);
 
-Player hero = new Player();
+Vector2 startingPosition = new Vector2(4, 2);
+Player hero = new Player(startingPosition);
 
 while (true)
 {
