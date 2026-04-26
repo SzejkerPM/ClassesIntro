@@ -1,67 +1,36 @@
 namespace ClassesIntro;
 
-public class Player
+public class Player : Character
 {
-    /*
-     * Akcje:
-     * - poruszanie się
-     * - wyświetlanie swojego awatara
-     * - podnoszenie przedmiotów
-     * - zarządzanie ekwipunkiem
-     * - otrzymywanie obrażeń
-     * - atak
-     * - rozmowa z NPC
-     * - podejmowanie i wykonywanie zadań
-     *
-     * Dane:
-     * - pozycja
-     * - prędkość poruszania się
-     * - awatar (reprezentacja graficzna gracza)
-     * - zasięg interakcji
-     * - ekwipunek (sposób przechowania go)
-     * - hp (aktualne, maskymalne, określające jakieś ograniczenia ruchu?)
-     * - siła ataku
-     * - zasięg ataku
-     * - częstotliwość ataku
-     * - celność
-     * - info czy z kimś rozmawialiśmy
-     * - dziennik
-     * - lista zadań ze statusem ich realizacji
-     */
-    private string avatar = "@";
-    private Vector2 position;
-
-    public Player(Vector2 position)
+    public Player(Vector2 position) : base(position)
     {
-        this.position = position;
     }
 
-    public void Display()
+    public override void ChooseAction()
     {
-        Console.SetCursorPosition(position.x,position.y);
-        Console.Write(avatar);
-    }
-
-    public void Move(int diffX, int diffY)
-    {
+        ConsoleKeyInfo keyInfo = Console.ReadKey(true); //true = ignore (przechwyć input, ale nie wyświetlaj go w konsoli)
         
-        Vector2 targetPosition = new Vector2(position.x + diffX, position.y + diffY);
-        
-        if (  targetPosition.x >= 0 &&   targetPosition.x < Console.BufferWidth)
+        ClearPosition();
+            
+        if (keyInfo.Key == ConsoleKey.A)
         {
-            position.x =   targetPosition.x;
+            // ruch w lewo
+            Move(-1, 0);
         }
-        
-        if ( targetPosition.y >= 0 &&  targetPosition.y < Console.BufferHeight)
+        else if (keyInfo.Key == ConsoleKey.D)
         {
-            position.y =  targetPosition.y;
+            // ruch w prawo
+            Move(1, 0);
         }
-        
-    }
-
-    public void ClearPosition()
-    {
-        Console.SetCursorPosition(position.x, position.y);
-        Console.Write(' ');
+        else if (keyInfo.Key == ConsoleKey.W)
+        {
+            // ruch w górę
+            Move(0, -1);
+        }
+        else if (keyInfo.Key == ConsoleKey.S)
+        {
+            // ruch w dół
+            Move(0, 1);
+        }
     }
 }
